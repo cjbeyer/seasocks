@@ -28,7 +28,7 @@
 
 #include <stdlib.h>
 
-static inline uint64_t __bswap_64(const uint64_t val) noexcept {
+static inline uint64_t bswap_64(const uint64_t val) noexcept {
     return _byteswap_uint64(val);
 }
 

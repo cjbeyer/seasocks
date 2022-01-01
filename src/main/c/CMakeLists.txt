@@ -100,7 +100,9 @@ target_include_directories(seasocks PUBLIC
         )
 
 add_library(Seasocks::seasocks ALIAS seasocks)
-target_link_libraries(seasocks PRIVATE Threads::Threads)
+if(NOT ANDROID)
+  target_link_libraries(seasocks PRIVATE Threads::Threads)
+endif()
 if (DEFLATE_SUPPORT)
     target_link_libraries(seasocks PRIVATE ZLIB::ZLIB)
 endif ()

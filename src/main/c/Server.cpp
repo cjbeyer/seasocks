@@ -115,6 +115,8 @@ pid_t gettid() {
 
 #ifdef _WIN32
     return ::GetCurrentThreadId();
+#elif defined(__clang__)
+  return ::gettid();
 #else
 #if __GLIBC_PREREQ(2, 30)
     return ::gettid();
