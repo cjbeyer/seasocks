@@ -42,7 +42,7 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     # anything higher than /W3 results in warnings from Catch2, standard libraries, etc 
     add_compile_options(/W4 /WX)
 else()
-    add_compile_options(-Wall -Werror -Wextra -pedantic -pedantic-errors)
+    add_compile_options(-Wall -Wextra -pedantic)
 endif()
 if (COVERAGE)
     add_compile_options(--coverage -O0)
