@@ -50,7 +50,9 @@ if (COVERAGE)
     set(CMAKE_SHARED_LINKER_FLAGS "${SHARED_EXE_LINKER_FLAGS} --coverage")
 endif ()
 
-find_package(Threads)
+if (NOT ANDROID)
+  find_package(Threads)
+endif()
 find_package(PythonInterp)
 
 if (NOT PYTHONINTERP_FOUND)
