@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.5)
 project(Seasocks VERSION 1.4.4)
 
 if(APPLE)
@@ -53,12 +53,12 @@ endif ()
 if (NOT ANDROID)
   find_package(Threads)
 endif()
-find_package(PythonInterp)
+find_package(Python3)
 
-if (NOT PYTHONINTERP_FOUND)
+if (NOT PYTHON3_FOUND)
     message(SEND_ERROR "Python not found")
 else()
-    message(STATUS "Using Python: '${PYTHON_EXECUTABLE}'")
+    message(STATUS "Using Python: '${Python3_EXECUTABLE}'")
 endif ()
 
 if (DEFLATE_SUPPORT)

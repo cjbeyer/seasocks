@@ -78,6 +78,8 @@
 
 #include "md5/md5.h"
 
+#include <cassert>
+#include <cstdint>
 #include <cstring>
 
 #undef BYTE_ORDER /* 1 = big-endian, -1 = little-endian, 0 = unknown */
@@ -187,6 +189,10 @@ md5_process(md5_state_t* pms, const md5_byte_t* data /*[64]*/) {
          * On little-endian machines, we can process properly aligned
          * data without copying it.
          */
+          // TESTING NEW alignment check
+          auto v1 = (reinterpret_cast<std::uintptr_t>(data)) & 3;
+          auto v2 = ((data - (const md5_byte_t*) 0) & 3);
+          assert (v1 == (uint64_t)v2); (void)v1;  (void)v2;
             if (!((data - (const md5_byte_t*) 0) & 3)) {
                 /* data are properly aligned */
                 X = (const md5_word_t*) data;
