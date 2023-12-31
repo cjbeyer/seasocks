@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(Seasocks VERSION 1.4.4)
+project(Seasocks VERSION 1.4.6)
 
 if(APPLE)
     message(FATAL_ERROR "${PROJECT_NAME} does not support Apple platforms")
@@ -39,7 +39,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.h.in internal/Config.h @ONLY)
 if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    # anything higher than /W3 results in warnings from Catch2, standard libraries, etc 
+    # anything higher than /W3 results in warnings from Catch2, standard libraries, etc
     add_compile_options(/W4 /WX)
 else()
     add_compile_options(-Wall -Wextra -pedantic)
@@ -53,7 +53,7 @@ endif ()
 if (ANDROID)
     set(Python3_ROOT_DIR "${ANDROID_TOOLCHAIN_ROOT}/python3")
 else()
-  find_package(Threads)
+  find_package(Threads REQUIRED)
 endif()
 find_package(Python3)
 
@@ -68,9 +68,6 @@ if (DEFLATE_SUPPORT)
 endif ()
 
 add_subdirectory(src)
-if (WIN32)
-    add_subdirectory(win32)
-endif()
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(cmake/SeasocksConfig.cmake.in ${PROJECT_NAME}Config.cmake

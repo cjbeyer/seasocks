@@ -27,6 +27,7 @@
 
 #include <cstdlib>
 #include <cstring>
+#include <algorithm>
 
 namespace seasocks {
 
@@ -63,11 +64,11 @@ size_t PageRequest::getUintHeader(const std::string& name) const {
     if (iter == _headers.end()) {
         return 0u;
     }
-    const auto val = std::stoi(iter->second);
-    if (val < 0) {
+    try {
+        return std::max(std::stoi(iter->second), 0);
+    } catch (const std::logic_error&) {
         return 0u;
     }
-    return static_cast<size_t>(val);
 }
 
 } // namespace seasocks
